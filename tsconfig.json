@@ -2,9 +2,17 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
-
+     "rootDir": "./src",
+     "outDir": "./dist",
+    "paths": {
+      "@ports/*": ["src/ports/*"],
+      "@use-cases/*": ["src/application/use-cases/*"],
+      "@domain/*": ["src/domain/*"],
+      "@in-memory/*": ["src/infrastructure/in-memory/*"],
+      "@persistence/*": ["src/infrastructure/persistence/*"],
+      "@rest/*": ["src/infrastructure/rest/*"],
+      "@thirds/*": ["src/infrastructure/thirds/*"]
+    },
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",

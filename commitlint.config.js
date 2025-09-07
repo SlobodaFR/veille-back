@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     extends: ['@commitlint/config-conventional'],
     rules: {
         'header-max-length': [0, 'always', 1000],
@@ -18,8 +18,7 @@ export default {
                 'test',
                 'revert',
                 'perf',
-                'vercel',
             ],
         ],
     },
-};
+}
