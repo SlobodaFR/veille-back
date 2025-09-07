@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": false,
     "verbatimModuleSyntax": false,
     "esModuleInterop": true,
+    "types": ["node", "vitest/globals"],
     "paths": {
       "@ports/*": [
         "src/ports/*"
@@ -49,5 +50,5 @@
   },
   "include": [
     "src/**/*"
-  ]
+  ],
 }

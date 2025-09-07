@@ -1,9 +1,9 @@
 import { type Config } from 'prettier'
 
 const config: Config = {
-    trailingComma: 'es5',
+    trailingComma: 'all',
     tabWidth: 4,
-    semi: false,
+    semi: true,
     singleQuote: true,
     plugins: ['@ianvs/prettier-plugin-sort-imports'],
     importOrder: [
