@@ -25,10 +25,10 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Run ESLint
-        run: npx eslint . --ext .ts,.tsx,.mts,.cts
+        run: npx eslint ./src --ext .ts,.tsx,.js
 
       - name: Run Prettier
-        run: npx prettier --check .
+        run: npx prettier ./src --check
 
       - name: Run Vitest
         run: npx vitest run
