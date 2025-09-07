@@ -31,7 +31,7 @@ jobs:
         run: npx prettier ./src --check
 
       - name: Run Vitest
-        run: npx vitest run
+        run: npx vitest run --coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
