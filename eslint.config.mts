@@ -1,19 +1,65 @@
-import js from '@eslint/js'
-import { defineConfig } from 'eslint/config'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+import eslintPluginTs from '@typescript-eslint/eslint-plugin'
+import parserTs from '@typescript-eslint/parser'
+import prettierPlugin from 'eslint-plugin-prettier'
 
-export default defineConfig([
+/** @type {import('eslint').Linter.FlatConfig[]} */
+export default [
     {
-        files: ['**/*.{js,mjs,cjs}'],
-        plugins: { js },
-        extends: ['js/recommended'],
-        languageOptions: { globals: globals.node },
+        ignores: [
+            'dist/**',
+            'config/**',
+            'coverage/**',
+            'requests/**',
+            'apps-script-gsheet/**',
+            'node_modules/**',
+        ],
     },
     {
-        files: ['**/*.{ts,tsx,mts,cts}'],
-        plugins: { '@typescript-eslint': tseslint.plugin },
-        extends: [tseslint.configs.recommended],
-        languageOptions: { globals: globals.node },
+        files: ['./src/**/*.ts'],
+        languageOptions: {
+            parser: parserTs,
+            parserOptions: {
+                project: './tsconfig.json',
+                tsconfigRootDir: new URL('.', import.meta.url).pathname,
+                sourceType: 'module',
+            },
+            globals: {
+                // Node + Vitest
+                process: 'readonly',
+                module: 'readonly',
+                require: 'readonly',
+                vi: 'readonly',
+                describe: 'readonly',
+                test: 'readonly',
+                expect: 'readonly',
+            },
+        },
+        plugins: {
+            '@typescript-eslint': eslintPluginTs,
+            prettier: prettierPlugin,
+        },
+        rules: {
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+            'prettier/prettier': 'warn',
+            'import/no-relative-parent-imports': 'error',
+            'boundaries/element-types': [
+                2,
+                {
+                    default: 'disallow',
+                    rules: [
+                        { from: 'domain', allow: [] },
+                        { from: 'application', allow: ['domain', 'ports'] },
+                        { from: 'ports', allow: ['domain'] },
+                        {
+                            from: 'infrastructure',
+                            allow: ['application', 'domain', 'ports'],
+                        },
+                    ],
+                },
+            ],
+        },
     },
-])
+]
