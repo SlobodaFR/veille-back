@@ -1,4 +1,4 @@
-import { Identifier } from "./identifier";
+import { Identifier } from './identifier';
 
 describe('Identifier', () => {
     it('should create an identifier with a valid UUID', () => {
@@ -35,6 +35,5 @@ describe('Identifier', () => {
             /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
         expect(uuidRegex.test(result.value)).toBeTruthy();
-
     });
 });

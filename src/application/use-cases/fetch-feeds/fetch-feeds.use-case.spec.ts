@@ -51,17 +51,17 @@ describe('FetchFeedsUseCase', () => {
 
         const articles = [
             Article.create({
-                id: 'a1',
+                id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                 title: 'Article 1',
-                feedId: '1',
+                feedId: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
                 url: 'http://example.com/article1',
                 content: 'Content 1',
                 publishedAt: new Date(),
             }),
             Article.create({
-                id: 'a2',
+                id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                 title: 'Article 2',
-                feedId: '1',
+                feedId: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
                 url: 'http://example.com/article2',
                 content: 'Content 2',
                 publishedAt: new Date(),

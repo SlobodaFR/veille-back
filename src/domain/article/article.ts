@@ -1,5 +1,7 @@
+import { Identifier } from '@domain/shared/identifier';
+
 type CreateArticleProps = {
-    id: string;
+    id?: string;
     feedId: string;
     title: string;
     url: string;
@@ -10,8 +12,8 @@ type CreateArticleProps = {
 
 export class Article {
     private constructor(
-        public readonly id: string,
-        public readonly feedId: string,
+        private readonly _id: Identifier,
+        public readonly _feedId: Identifier,
         public readonly title: string,
         public readonly url: string,
         public readonly content: string,
@@ -19,10 +21,18 @@ export class Article {
         public readonly read: boolean,
     ) {}
 
-    static create(props: CreateArticleProps): Article {
+    public get id(): string {
+        return this._id.value;
+    }
+
+    public get feedId(): string {
+        return this._feedId.value;
+    }
+
+    public static create(props: CreateArticleProps): Article {
         return new Article(
-            props.id,
-            props.feedId,
+            props.id ? Identifier.createFrom(props.id) : Identifier.create(),
+            Identifier.createFrom(props.feedId),
             props.title,
             props.url,
             props.content,
@@ -31,10 +41,10 @@ export class Article {
         );
     }
 
-    markAsRead(): Article {
+    public markAsRead(): Article {
         return new Article(
-            this.id,
-            this.feedId,
+            this._id,
+            this._feedId,
             this.title,
             this.url,
             this.content,

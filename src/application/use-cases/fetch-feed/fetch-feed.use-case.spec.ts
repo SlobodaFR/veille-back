@@ -31,17 +31,17 @@ describe('FetchFeedUseCase', () => {
         feedFetcherService = {
             fetch: vi.fn().mockResolvedValue([
                 Article.create({
-                    id: 'a1',
+                    id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                     title: 'Article 1',
-                    feedId: '1',
+                    feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                     url: 'http://example.com/article1',
                     content: 'Content 1',
                     publishedAt: new Date(),
                 }),
                 Article.create({
-                    id: 'a2',
+                    id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                     title: 'Article 2',
-                    feedId: '1',
+                    feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                     url: 'http://example.com/article2',
                     content: 'Content 2',
                     publishedAt: new Date(),
@@ -73,9 +73,9 @@ describe('FetchFeedUseCase', () => {
         );
         await articleRepository.save(
             Article.create({
-                id: 'a1',
+                id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                 title: 'Article 1',
-                feedId: '1',
+                feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                 url: 'http://example.com/article1',
                 content: 'Content 1',
                 publishedAt: new Date(),
@@ -83,9 +83,9 @@ describe('FetchFeedUseCase', () => {
         );
         await articleRepository.save(
             Article.create({
-                id: 'a2',
+                id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                 title: 'Article 2',
-                feedId: '1',
+                feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                 url: 'http://example.com/article2',
                 content: 'Content 2',
                 publishedAt: new Date(),
@@ -93,9 +93,9 @@ describe('FetchFeedUseCase', () => {
         );
         await articleRepository.save(
             Article.create({
-                id: 'b1',
+                id: '3f1c38f8-6e96-47e5-a97e-06a6caef29c1',
                 title: 'Article 3',
-                feedId: '2',
+                feedId: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
                 url: 'http://example.com/article3',
                 content: 'Content 3',
                 publishedAt: new Date(),
@@ -103,7 +103,7 @@ describe('FetchFeedUseCase', () => {
         );
 
         vi.clearAllMocks();
-        await useCase.execute('1');
+        await useCase.execute('fde593f5-789d-4cd5-9323-7e806408c47a');
 
         expect(feedRepository.findById).toHaveBeenCalledTimes(1);
         expect(feedFetcherService.fetch).toHaveBeenCalledTimes(1);
@@ -114,7 +114,7 @@ describe('FetchFeedUseCase', () => {
     it('should handle no feeds', async () => {
         (feedRepository.findById as Mock).mockResolvedValue(null);
 
-        await useCase.execute('1');
+        await useCase.execute('fde593f5-789d-4cd5-9323-7e806408c47a');
 
         expect(feedRepository.findById).toHaveBeenCalledTimes(1);
         expect(feedFetcherService.fetch).not.toHaveBeenCalled();
