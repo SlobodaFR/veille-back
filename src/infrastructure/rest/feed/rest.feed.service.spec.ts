@@ -10,6 +10,10 @@ let listFeedsUseCase: ListFeedsUseCase;
 let subscribeToFeedUseCase: SubscribeToFeedUseCase;
 
 let restFeedService: RestFeedService;
+let fetchFeedUseCase: any;
+let feedRepository: any;
+let articleRepository: any;
+let feedFetcherService: any;
 
 describe('RestFeedService', () => {
     beforeEach(() => {
@@ -26,10 +30,18 @@ describe('RestFeedService', () => {
         subscribeToFeedUseCase = {
             execute: vi.fn(),
         } as unknown as SubscribeToFeedUseCase;
+        fetchFeedUseCase = { execute: vi.fn() };
+        feedRepository = {};
+        articleRepository = {};
+        feedFetcherService = {};
 
         restFeedService = new RestFeedService(
             listFeedsUseCase,
             subscribeToFeedUseCase,
+            fetchFeedUseCase,
+            feedRepository,
+            articleRepository,
+            feedFetcherService,
         );
     });
 
