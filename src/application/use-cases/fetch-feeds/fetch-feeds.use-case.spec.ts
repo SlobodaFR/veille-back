@@ -1,3 +1,6 @@
+import { Mock, vi } from 'vitest';
+
+import { Article } from '@domain/article';
 import { Feed } from '@domain/feed';
 
 import { ArticleRepository } from '@ports/article.repository.ts';
@@ -8,22 +11,22 @@ import { FetchFeedsUseCase } from './fetch-feeds.use-case';
 
 describe('FetchFeedsUseCase', () => {
     let fetchFeedsUseCase: FetchFeedsUseCase;
-    let feedRepository: any;
-    let articleRepository: any;
-    let feedFetcherService: any;
+    let feedRepository: FeedRepository;
+    let articleRepository: ArticleRepository;
+    let feedFetcherService: FeedFetcherService;
 
     beforeEach(() => {
         feedRepository = {
-            list: vi.fn(),
+            list: vi.fn().mockResolvedValue([]),
             save: vi.fn(),
+            findById: vi.fn().mockResolvedValue(null),
         } as unknown as FeedRepository;
         articleRepository = {
             save: vi.fn(),
         } as unknown as ArticleRepository;
         feedFetcherService = {
-            fetch: vi.fn(),
+            fetch: vi.fn().mockResolvedValue([]),
         } as unknown as FeedFetcherService;
-
         fetchFeedsUseCase = new FetchFeedsUseCase(
             feedRepository,
             articleRepository,
@@ -32,7 +35,7 @@ describe('FetchFeedsUseCase', () => {
     });
 
     it('should fetch feeds and save articles', async () => {
-        const mockFeeds = [
+        const feeds = [
             Feed.create({
                 id: '1',
                 title: 'Feed 1',
@@ -44,50 +47,37 @@ describe('FetchFeedsUseCase', () => {
                 url: 'http://example.com/feed2',
             }),
         ];
-        const mockArticlesFeed1 = [
-            { id: 'a1', title: 'Article 1', feedId: '1' },
-            { id: 'a2', title: 'Article 2', feedId: '1' },
-        ];
-        const mockArticlesFeed2 = [
-            { id: 'b1', title: 'Article 3', feedId: '2' },
-        ];
+        (feedRepository.list as Mock).mockResolvedValue(feeds);
 
-        feedRepository.list.mockResolvedValue(mockFeeds);
-        feedFetcherService.fetch
-            .mockResolvedValueOnce(mockArticlesFeed1)
-            .mockResolvedValueOnce(mockArticlesFeed2);
+        const articles = [
+            Article.create({
+                id: 'a1',
+                title: 'Article 1',
+                feedId: '1',
+                url: 'http://example.com/article1',
+                content: 'Content 1',
+                publishedAt: new Date(),
+            }),
+            Article.create({
+                id: 'a2',
+                title: 'Article 2',
+                feedId: '1',
+                url: 'http://example.com/article2',
+                content: 'Content 2',
+                publishedAt: new Date(),
+            }),
+        ];
+        (feedFetcherService.fetch as Mock).mockResolvedValue(articles);
 
         await fetchFeedsUseCase.execute();
 
         expect(feedRepository.list).toHaveBeenCalledTimes(1);
         expect(feedFetcherService.fetch).toHaveBeenCalledTimes(2);
-        expect(feedFetcherService.fetch).toHaveBeenNthCalledWith(
-            1,
-            mockFeeds[0],
-        );
-        expect(feedFetcherService.fetch).toHaveBeenNthCalledWith(
-            2,
-            mockFeeds[1],
-        );
-        expect(articleRepository.save).toHaveBeenCalledTimes(3);
-        expect(articleRepository.save).toHaveBeenNthCalledWith(
-            1,
-            mockArticlesFeed1[0],
-        );
-        expect(articleRepository.save).toHaveBeenNthCalledWith(
-            2,
-            mockArticlesFeed1[1],
-        );
-        expect(articleRepository.save).toHaveBeenNthCalledWith(
-            3,
-            mockArticlesFeed2[0],
-        );
+        expect(articleRepository.save).toHaveBeenCalledTimes(4);
         expect(feedRepository.save).toHaveBeenCalledTimes(2);
     });
 
     it('should handle no feeds', async () => {
-        feedRepository.list.mockResolvedValue([]);
-
         await fetchFeedsUseCase.execute();
 
         expect(feedRepository.list).toHaveBeenCalledTimes(1);

@@ -16,6 +16,6 @@ export class InMemoryFeedRepository implements FeedRepository {
     }
 
     async list() {
-        return this.feeds;
+        return Promise.resolve(this.feeds);
     }
 }

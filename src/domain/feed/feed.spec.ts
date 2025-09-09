@@ -50,11 +50,11 @@ describe('Feed', () => {
         });
         const updatedFeed = feed.withFetchedAt(newFetchedAt);
 
-        expect(updatedFeed).not.toBe(feed); // Ensure it's a new instance
+        expect(updatedFeed).not.toBe(feed);
         expect(updatedFeed.id).toBe(feed.id);
         expect(updatedFeed.title).toBe(feed.title);
         expect(updatedFeed.url).toBe(feed.url);
         expect(updatedFeed.fetchedAt).toBe(newFetchedAt);
-        expect(feed.fetchedAt).toBe(initialFetchedAt); // Original instance remains unchanged
+        expect(feed.fetchedAt).toBe(initialFetchedAt);
     });
 });

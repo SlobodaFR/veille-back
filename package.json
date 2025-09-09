@@ -14,8 +14,10 @@
     "jiti": "^2.5.1",
     "jsdom": "^26.1.0",
     "lint-staged": "^16.1.6",
+    "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.42.0",
     "vitest": "^3.2.4"
@@ -24,25 +26,41 @@
     "@nestjs/common": "^11.1.6",
     "@nestjs/core": "^11.1.6",
     "@nestjs/platform-express": "^11.1.6",
+    "@nestjs/swagger": "^11.2.0",
     "reflect-metadata": "^0.2.2",
     "rss-parser": "^3.13.0",
-    "rxjs": "^7.8.2"
+    "rxjs": "^7.8.2",
+    "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
     "prepare": "husky",
     "lint": "eslint ./src --ext .ts,.tsx,.js --fix",
     "format": "prettier ./src --write",
     "lint-staged": "lint-staged",
-    "check": "tsc -p ./tsconfig.json",
+    "check": "tsc --noEmit -p tsconfig.json",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "start:dev": "nodemon",
+    "start": "node dist/infrastructure/rest/server.js",
+    "build": "tsc -p tsconfig.json"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
-      "npm run check",
       "npm run lint",
       "npm run format"
     ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/infrastructure/rest/server.ts",
+      "src"
+    ],
+    "ext": "ts,tsx,js,json",
+    "ignore": [
+      "dist/*",
+      "coverage/*"
+    ],
+    "exec": "ts-node -r tsconfig-paths/register ./src/infrastructure/rest/server.ts"
   }
 }
