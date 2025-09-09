@@ -33,6 +33,7 @@ describe('Article', () => {
             read: true,
         });
 
+        expect(article.url).toBe('http://example.com/another-article');
         expect(article.read).toBe(true);
     });
 

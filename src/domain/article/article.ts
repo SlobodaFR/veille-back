@@ -1,4 +1,5 @@
 import { Identifier } from '@domain/shared/identifier';
+import { Url } from '@domain/shared/url/url';
 
 type CreateArticleProps = {
     id?: string;
@@ -15,7 +16,7 @@ export class Article {
         private readonly _id: Identifier,
         public readonly _feedId: Identifier,
         public readonly title: string,
-        public readonly url: string,
+        public readonly _url: Url,
         public readonly content: string,
         public readonly publishedAt: Date,
         public readonly read: boolean,
@@ -29,12 +30,16 @@ export class Article {
         return this._feedId.value;
     }
 
+    public get url(): string {
+        return this._url.value;
+    }
+
     public static create(props: CreateArticleProps): Article {
         return new Article(
             props.id ? Identifier.createFrom(props.id) : Identifier.create(),
             Identifier.createFrom(props.feedId),
             props.title,
-            props.url,
+            Url.create(props.url),
             props.content,
             props.publishedAt,
             props.read ?? false,
@@ -46,7 +51,7 @@ export class Article {
             this._id,
             this._feedId,
             this.title,
-            this.url,
+            this._url,
             this.content,
             this.publishedAt,
             true,
