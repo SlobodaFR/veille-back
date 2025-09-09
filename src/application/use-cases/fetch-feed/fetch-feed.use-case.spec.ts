@@ -18,7 +18,7 @@ describe('FetchFeedUseCase', () => {
         feedRepository = {
             findById: vi.fn().mockResolvedValue(
                 Feed.create({
-                    id: '1',
+                    id: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                     title: 'Feed 1',
                     url: 'http://example.com/feed1',
                 }),
@@ -59,14 +59,14 @@ describe('FetchFeedUseCase', () => {
     it('should fetch feed and save articles', async () => {
         await feedRepository.save(
             Feed.create({
-                id: '1',
+                id: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                 title: 'Feed 1',
                 url: 'http://example.com/feed1',
             }),
         );
         await feedRepository.save(
             Feed.create({
-                id: '2',
+                id: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
                 title: 'Feed 2',
                 url: 'http://example.com/feed2',
             }),

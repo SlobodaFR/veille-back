@@ -10,7 +10,7 @@ describe('RssFeedFetcherService', () => {
 
     it('should fetch and parse RSS feed', async () => {
         const feed: Feed = Feed.create({
-            id: '1',
+            id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
             title: 'Test Feed',
             url: 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         });

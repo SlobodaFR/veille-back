@@ -37,12 +37,12 @@ describe('FetchFeedsUseCase', () => {
     it('should fetch feeds and save articles', async () => {
         const feeds = [
             Feed.create({
-                id: '1',
+                id: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
                 title: 'Feed 1',
                 url: 'http://example.com/feed1',
             }),
             Feed.create({
-                id: '2',
+                id: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
                 title: 'Feed 2',
                 url: 'http://example.com/feed2',
             }),

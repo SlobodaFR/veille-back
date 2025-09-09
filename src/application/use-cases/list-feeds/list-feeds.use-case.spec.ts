@@ -23,7 +23,7 @@ describe('ListFeedsUseCase', () => {
 
         await feedRepository.save(
             Feed.create({
-                id: '1',
+                id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
                 title: 'Test Feed',
                 url: 'http://example.com/rss',
                 fetchedAt: new Date(),

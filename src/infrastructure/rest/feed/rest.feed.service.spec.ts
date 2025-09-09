@@ -16,7 +16,7 @@ describe('RestFeedService', () => {
         listFeedsUseCase = {
             execute: vi.fn().mockResolvedValue([
                 Feed.create({
-                    id: 'feed-id',
+                    id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
                     title: 'Feed Title',
                     url: 'http://example.com/feed',
                     fetchedAt: new Date(),
@@ -46,7 +46,7 @@ describe('RestFeedService', () => {
             const title = 'New Feed';
             const url = 'http://example.com/new-feed';
             const mockFeed = Feed.create({
-                id: 'new-feed-id',
+                id: '3f178b6d-dba8-4477-8010-ff752d2f926d',
                 title,
                 url,
                 fetchedAt: new Date(),

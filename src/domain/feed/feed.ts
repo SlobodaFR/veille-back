@@ -1,5 +1,7 @@
+import { Identifier } from '@domain/shared/identifier';
+
 type CreateFeedProps = {
-    id: string;
+    id?: string;
     title: string;
     url: string;
     fetchedAt?: Date;
@@ -7,23 +9,27 @@ type CreateFeedProps = {
 
 export class Feed {
     private constructor(
-        public readonly id: string,
+        private readonly _id: Identifier,
         public readonly title: string,
         public readonly url: string,
         public readonly fetchedAt,
     ) {}
 
-    static create(props: CreateFeedProps): Feed {
+    public get id(): string {
+        return this._id.value;
+    }
+
+    public static create(props: CreateFeedProps): Feed {
         const now = new Date();
         return new Feed(
-            props.id,
+            props.id ? Identifier.createFrom(props.id) : Identifier.create(),
             props.title,
             props.url,
             props.fetchedAt ?? now,
         );
     }
 
-    withFetchedAt(fetchedAt: Date): Feed {
-        return new Feed(this.id, this.title, this.url, fetchedAt);
+    public withFetchedAt(fetchedAt: Date): Feed {
+        return new Feed(this._id, this.title, this.url, fetchedAt);
     }
 }

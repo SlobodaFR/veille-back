@@ -11,12 +11,14 @@ describe('InMemoryFeedRepository', () => {
 
     it('should save and retrieve a feed by id', async () => {
         const feed = {
-            id: '1',
+            id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
             url: 'http://example.com/rss',
             title: 'Example Feed',
         } as unknown as Feed;
         await repository.save(feed);
-        const retrievedFeed = await repository.findById('1');
+        const retrievedFeed = await repository.findById(
+            'fd324bc9-a029-445e-9246-e06b7c15bfe6',
+        );
         expect(retrievedFeed).toEqual(feed);
     });
 
@@ -27,12 +29,12 @@ describe('InMemoryFeedRepository', () => {
 
     it('should list all saved feeds', async () => {
         const feed1 = {
-            id: '1',
+            id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
             url: 'http://example.com/rss1',
             title: 'Example Feed 1',
         } as unknown as Feed;
         const feed2 = {
-            id: '2',
+            id: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
             url: 'http://example.com/rss2',
             title: 'Example Feed 2',
         } as unknown as Feed;
