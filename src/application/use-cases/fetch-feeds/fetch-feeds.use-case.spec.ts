@@ -39,12 +39,12 @@ describe('FetchFeedsUseCase', () => {
             Feed.create({
                 id: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
                 title: 'Feed 1',
-                url: 'http://example.com/feed1',
+                url: 'https://example.com/feed1',
             }),
             Feed.create({
                 id: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
                 title: 'Feed 2',
-                url: 'http://example.com/feed2',
+                url: 'https://example.com/feed2',
             }),
         ];
         (feedRepository.list as Mock).mockResolvedValue(feeds);
@@ -54,7 +54,7 @@ describe('FetchFeedsUseCase', () => {
                 id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                 title: 'Article 1',
                 feedId: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
-                url: 'http://example.com/article1',
+                url: 'https://example.com/article1',
                 content: 'Content 1',
                 publishedAt: new Date(),
             }),
@@ -62,7 +62,7 @@ describe('FetchFeedsUseCase', () => {
                 id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                 title: 'Article 2',
                 feedId: '6abd98c9-4e82-41fd-9d89-08c2bf58d54e',
-                url: 'http://example.com/article2',
+                url: 'https://example.com/article2',
                 content: 'Content 2',
                 publishedAt: new Date(),
             }),

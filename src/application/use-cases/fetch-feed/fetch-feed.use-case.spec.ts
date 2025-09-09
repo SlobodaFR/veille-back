@@ -20,7 +20,7 @@ describe('FetchFeedUseCase', () => {
                 Feed.create({
                     id: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                     title: 'Feed 1',
-                    url: 'http://example.com/feed1',
+                    url: 'https://example.com/feed1',
                 }),
             ),
             save: vi.fn(),
@@ -34,7 +34,7 @@ describe('FetchFeedUseCase', () => {
                     id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                     title: 'Article 1',
                     feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
-                    url: 'http://example.com/article1',
+                    url: 'https://example.com/article1',
                     content: 'Content 1',
                     publishedAt: new Date(),
                 }),
@@ -42,7 +42,7 @@ describe('FetchFeedUseCase', () => {
                     id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                     title: 'Article 2',
                     feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
-                    url: 'http://example.com/article2',
+                    url: 'https://example.com/article2',
                     content: 'Content 2',
                     publishedAt: new Date(),
                 }),
@@ -61,14 +61,14 @@ describe('FetchFeedUseCase', () => {
             Feed.create({
                 id: 'fde593f5-789d-4cd5-9323-7e806408c47a',
                 title: 'Feed 1',
-                url: 'http://example.com/feed1',
+                url: 'https://example.com/feed1',
             }),
         );
         await feedRepository.save(
             Feed.create({
                 id: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
                 title: 'Feed 2',
-                url: 'http://example.com/feed2',
+                url: 'https://example.com/feed2',
             }),
         );
         await articleRepository.save(
@@ -76,7 +76,7 @@ describe('FetchFeedUseCase', () => {
                 id: '6acfcf24-7d13-4234-9160-6c832db9afc4',
                 title: 'Article 1',
                 feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
-                url: 'http://example.com/article1',
+                url: 'https://example.com/article1',
                 content: 'Content 1',
                 publishedAt: new Date(),
             }),
@@ -86,7 +86,7 @@ describe('FetchFeedUseCase', () => {
                 id: 'fe52d6fc-f65a-4ec9-8c39-b8676e32a3b2',
                 title: 'Article 2',
                 feedId: 'fde593f5-789d-4cd5-9323-7e806408c47a',
-                url: 'http://example.com/article2',
+                url: 'https://example.com/article2',
                 content: 'Content 2',
                 publishedAt: new Date(),
             }),
@@ -96,7 +96,7 @@ describe('FetchFeedUseCase', () => {
                 id: '3f1c38f8-6e96-47e5-a97e-06a6caef29c1',
                 title: 'Article 3',
                 feedId: '52c72929-60d7-4df3-a55c-ac2ce7823fbf',
-                url: 'http://example.com/article3',
+                url: 'https://example.com/article3',
                 content: 'Content 3',
                 publishedAt: new Date(),
             }),

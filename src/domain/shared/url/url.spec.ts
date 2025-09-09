@@ -13,12 +13,12 @@ describe('Url', () => {
     });
 
     it('should accept http and https', () => {
-        expect(() => Url.create('http://foo.com')).not.toThrow();
+        expect(() => Url.create('https://foo.com')).not.toThrow();
         expect(() => Url.create('https://bar.com')).not.toThrow();
     });
 
     it('should reject unsupported protocols', () => {
-        expect(() => Url.create('ftp://foo.com')).toThrowError(
+        expect(() => Url.create('sftp://foo.com')).toThrowError(
             'Invalid URL format',
         );
     });

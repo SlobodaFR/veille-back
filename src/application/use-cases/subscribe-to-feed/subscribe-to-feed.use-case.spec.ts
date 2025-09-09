@@ -11,7 +11,7 @@ describe('SubscribeToFeedUseCase', () => {
         useCase = new SubscribeToFeedUseCase(new InMemoryFeedRepository());
     });
     it('should subscribe to a new feed', async () => {
-        const url = 'http://example.com/rss';
+        const url = 'https://example.com/rss';
         const title = 'Example Feed';
         const feed = await useCase.execute(url, title);
         expect(feed.url).toBe(url);

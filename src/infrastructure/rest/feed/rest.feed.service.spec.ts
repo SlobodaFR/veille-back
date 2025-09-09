@@ -18,7 +18,7 @@ describe('RestFeedService', () => {
                 Feed.create({
                     id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
                     title: 'Feed Title',
-                    url: 'http://example.com/feed',
+                    url: 'https://example.com/feed',
                     fetchedAt: new Date(),
                 }),
             ]),
@@ -44,7 +44,7 @@ describe('RestFeedService', () => {
     describe('subscribeToFeed', () => {
         it('should subscribe to a new feed and return the feed', async () => {
             const title = 'New Feed';
-            const url = 'http://example.com/new-feed';
+            const url = 'https://example.com/new-feed';
             const mockFeed = Feed.create({
                 id: '3f178b6d-dba8-4477-8010-ff752d2f926d',
                 title,

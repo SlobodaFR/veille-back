@@ -25,7 +25,7 @@ describe('ListFeedsUseCase', () => {
             Feed.create({
                 id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
                 title: 'Test Feed',
-                url: 'http://example.com/rss',
+                url: 'https://example.com/rss',
                 fetchedAt: new Date(),
             }),
         );

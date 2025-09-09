@@ -4,7 +4,7 @@ describe('Feed', () => {
     it('should create a Feed instance with provided fetchedAt', () => {
         const id = 'd3b00de3-5c03-4878-9360-912065587fbb';
         const title = 'Test Feed';
-        const url = 'http://example.com/feed';
+        const url = 'https://example.com/feed';
         const fetchedAt = new Date('2024-01-01T00:00:00Z');
 
         const feed = Feed.create({ id, title, url, fetchedAt });
@@ -18,7 +18,7 @@ describe('Feed', () => {
     it('should create a Feed instance with current date as fetchedAt if not provided', () => {
         const id = 'e2430fe5-6341-42cf-8a08-10917149b05f';
         const title = 'Another Feed';
-        const url = 'http://example.com/another-feed';
+        const url = 'https://example.com/another-feed';
 
         const beforeCreation = new Date();
         const feed = Feed.create({ id, title, url });
@@ -38,7 +38,7 @@ describe('Feed', () => {
     it('should return a new Feed instance with updated fetchedAt', () => {
         const id = '0500824e-3d9f-46a0-a275-ae9afe7f174e';
         const title = 'Update Feed';
-        const url = 'http://example.com/update-feed';
+        const url = 'https://example.com/update-feed';
         const initialFetchedAt = new Date('2024-01-01T00:00:00Z');
         const newFetchedAt = new Date('2024-02-01T00:00:00Z');
 
