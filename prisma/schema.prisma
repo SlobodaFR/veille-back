@@ -10,16 +10,17 @@ model Feed {
 }
 
 model Article {
-  id        String   @id @default(uuid())
-  feedId    String
-  title     String
-  url       String
-  published DateTime
-  feed      Feed     @relation(fields: [feedId], references: [id])
+id          String   @id @default(uuid())
+  feedId      String
+  title       String
+  url         String
+  content     String
+  publishedAt DateTime
+  read        Boolean  @default(false)
+  feed        Feed     @relation(fields: [feedId], references: [id])
 }
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {

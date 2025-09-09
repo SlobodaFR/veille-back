@@ -10,6 +10,8 @@ import { FeedRepository } from '@ports/feed.repository.ts';
 
 import { InMemoryArticleRepository } from '@in-memory/article-repository';
 import { InMemoryFeedRepository } from '@in-memory/feed-repository';
+import { SqliteArticleRepository } from '@persistence/sqlite/article-repository';
+import { SqliteFeedRepository } from '@persistence/sqlite/feed-repository';
 import { RestFeedController } from '@rest/feed/rest.feed.controller.ts';
 import { RestFeedService } from '@rest/feed/rest.feed.service.ts';
 import { RssFeedFetcherService } from '@thirds/rss/feed-fetcher-service';
@@ -54,8 +56,8 @@ import { RssFeedFetcherService } from '@thirds/rss/feed-fetcher-service';
                 new RetrieveFeedArticlesUseCase(articleRepository),
             inject: ['ArticleRepository'],
         },
-        { provide: 'FeedRepository', useClass: InMemoryFeedRepository },
-        { provide: 'ArticleRepository', useClass: InMemoryArticleRepository },
+        { provide: 'FeedRepository', useClass: SqliteFeedRepository },
+        { provide: 'ArticleRepository', useClass: SqliteArticleRepository },
         { provide: 'FeedFetcherService', useClass: RssFeedFetcherService },
     ],
 })

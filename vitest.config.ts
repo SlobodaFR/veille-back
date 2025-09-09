@@ -16,6 +16,7 @@ export default defineConfig({
                 'src/**/*.module.ts',
                 'src/ports/*',
                 'src/infrastructure/rest/server.ts',
+                'src/infrastructure/persistence/sqlite/database.ts',
             ],
         },
     },

@@ -27,6 +27,7 @@ export class RestFeedService {
         @Inject(RetrieveFeedArticlesUseCase)
         private readonly retrieveFeedArticlesUseCase: RetrieveFeedArticlesUseCase,
     ) {}
+
     async getFeedArticles(feedId: string) {
         if (!this.retrieveFeedArticlesUseCase)
             throw new Error('RetrieveFeedArticlesUseCase not provided');
