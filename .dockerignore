@@ -1,0 +1,8 @@
+node_modules
+coverage
+lcov-report
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.env
