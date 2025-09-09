@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { FetchFeedUseCase } from '@use-cases/fetch-feed';
 import { ListFeedsUseCase } from '@use-cases/list-feeds';
+import { RetrieveFeedArticlesUseCase } from '@use-cases/retrieve-feed-articles/retrieve-feed-articles.use-case';
 import { SubscribeToFeedUseCase } from '@use-cases/subscribe-to-feed';
 
 import { ArticleRepository } from '@ports/article.repository.ts';
@@ -46,6 +47,12 @@ import { RssFeedFetcherService } from '@thirds/rss/feed-fetcher-service';
                 'ArticleRepository',
                 'FeedFetcherService',
             ],
+        },
+        {
+            provide: RetrieveFeedArticlesUseCase,
+            useFactory: (articleRepository: ArticleRepository) =>
+                new RetrieveFeedArticlesUseCase(articleRepository),
+            inject: ['ArticleRepository'],
         },
         { provide: 'FeedRepository', useClass: InMemoryFeedRepository },
         { provide: 'ArticleRepository', useClass: InMemoryArticleRepository },

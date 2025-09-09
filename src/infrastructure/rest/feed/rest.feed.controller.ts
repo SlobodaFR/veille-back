@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
 import { CreateFeedItemDto } from '@rest/feed/dto/create-feed-item.dto.ts';
 import { FeedItemDto } from '@rest/feed/dto/feed-item.dto.ts';
@@ -24,5 +24,12 @@ export class RestFeedController {
         return FeedItemDto.fromDomain(
             await this.feedService.subscribeToFeed(title, url),
         );
+    }
+
+    @Get(':id/articles')
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({ type: FeedItemDto, isArray: true })
+    async getFeedArticles(@Param('id') feedId: string): Promise<Array<any>> {
+        return await this.feedService.getFeedArticles(feedId);
     }
 }

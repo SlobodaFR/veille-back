@@ -42,4 +42,29 @@ describe('RestFeedController', () => {
             );
         });
     });
+
+    describe('getFeedArticles', () => {
+        it('should return articles for a feed', async () => {
+            const feedId = '3f178b6d-dba8-4477-8010-ff752d2f926d';
+            (restFeedService.getFeedArticles as any) = vi
+                .fn()
+                .mockResolvedValue([
+                    {
+                        id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
+                        feedId,
+                        title: 'Article 1',
+                        url: 'https://example.com/a1',
+                        content: 'Content 1',
+                        publishedAt: new Date(),
+                    },
+                ]);
+            const result = await restFeedController.getFeedArticles(feedId);
+            expect(Array.isArray(result)).toBe(true);
+            expect(result.length).toBe(1);
+            expect(result[0].feedId).toBe(feedId);
+            expect(restFeedService.getFeedArticles).toHaveBeenCalledWith(
+                feedId,
+            );
+        });
+    });
 });

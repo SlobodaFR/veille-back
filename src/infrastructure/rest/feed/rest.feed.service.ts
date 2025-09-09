@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { FetchFeedUseCase } from '@use-cases/fetch-feed';
 import { ListFeedsUseCase } from '@use-cases/list-feeds';
+import { RetrieveFeedArticlesUseCase } from '@use-cases/retrieve-feed-articles/retrieve-feed-articles.use-case';
 import { SubscribeToFeedUseCase } from '@use-cases/subscribe-to-feed';
 
 import { Feed } from '@domain/feed';
@@ -23,7 +24,14 @@ export class RestFeedService {
         private readonly articleRepository: ArticleRepository,
         @Inject('FeedFetcherService')
         private readonly feedFetcherService: FeedFetcherService,
+        @Inject(RetrieveFeedArticlesUseCase)
+        private readonly retrieveFeedArticlesUseCase: RetrieveFeedArticlesUseCase,
     ) {}
+    async getFeedArticles(feedId: string) {
+        if (!this.retrieveFeedArticlesUseCase)
+            throw new Error('RetrieveFeedArticlesUseCase not provided');
+        return this.retrieveFeedArticlesUseCase.execute(feedId);
+    }
 
     async getFeeds(): Promise<Array<Feed>> {
         return this.listFeedsUseCase.execute();

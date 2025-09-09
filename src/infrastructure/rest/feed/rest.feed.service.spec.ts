@@ -2,6 +2,7 @@ import { ListFeedsUseCase } from '@use-cases/list-feeds';
 import { SubscribeToFeedUseCase } from '@use-cases/subscribe-to-feed';
 import { Mock } from 'vitest';
 
+import { Article } from '@domain/article';
 import { Feed } from '@domain/feed';
 
 import { RestFeedService } from '@rest/feed/rest.feed.service.ts';
@@ -14,6 +15,7 @@ let fetchFeedUseCase: any;
 let feedRepository: any;
 let articleRepository: any;
 let feedFetcherService: any;
+let retrieveFeedArticlesUseCase: any;
 
 describe('RestFeedService', () => {
     beforeEach(() => {
@@ -34,6 +36,7 @@ describe('RestFeedService', () => {
         feedRepository = {};
         articleRepository = {};
         feedFetcherService = {};
+        retrieveFeedArticlesUseCase = { execute: vi.fn() };
 
         restFeedService = new RestFeedService(
             listFeedsUseCase,
@@ -42,6 +45,7 @@ describe('RestFeedService', () => {
             feedRepository,
             articleRepository,
             feedFetcherService,
+            retrieveFeedArticlesUseCase,
         );
     });
 
@@ -73,6 +77,26 @@ describe('RestFeedService', () => {
                 url,
                 title,
             );
+        });
+    });
+    describe('getFeedArticles', () => {
+        it('should return articles for a feed', async () => {
+            const feedId = '3f178b6d-dba8-4477-8010-ff752d2f926d';
+            const mockArticles = [
+                Article.create({
+                    id: 'fd324bc9-a029-445e-9246-e06b7c15bfe6',
+                    feedId,
+                    title: 'Article 1',
+                    url: 'https://example.com/a1',
+                    content: 'Content 1',
+                    publishedAt: new Date(),
+                }),
+            ];
+            retrieveFeedArticlesUseCase.execute.mockResolvedValue(mockArticles);
+            const articles = await restFeedService.getFeedArticles(feedId);
+            expect(Array.isArray(articles)).toBe(true);
+            expect(articles.length).toBe(1);
+            expect(articles[0].feedId).toBe(feedId);
         });
     });
 });
